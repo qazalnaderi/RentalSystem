@@ -1,12 +1,10 @@
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.*;
 public class Rental {
     private int id;
     private Movie movie;
     private Customer customer;
-    private LocalDate rentalDate;
-    private LocalDate returnDate  = rentalDate.plusDays(7) ;
+    private Date rentalDate;
+    private Date returnDate  ;
 
     public Rental(Movie movie , Customer customer , int id) {
         this.movie = movie;
@@ -26,15 +24,16 @@ public class Rental {
         return customer;
     }
 
-    public LocalDate getRentalDate() {
+    public Date getRentalDate() {
         return rentalDate;
     }
 
-    public LocalDate getReturnDate() {
+    public Date getReturnDate() {
         return returnDate;
     }
 
-    public void setRentalDate(LocalDate rentalDate) {
+    public void setRentalDate(Date rentalDate) {
         this.rentalDate = rentalDate;
+    }
     }
 }

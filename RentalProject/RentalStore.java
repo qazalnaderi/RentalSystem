@@ -62,7 +62,7 @@ public class RentalStore {
                 String fullID = Integer.toString(movie.getId()) + Integer.toString(customer.getId());
                 int mainID = Integer.parseInt(fullID);
                 Rental rental = new Rental(movie , customer , mainID);
-                LocalDate now = LocalDate.now();
+                Date now = new Date();
                 rental.setRentalDate(now) ;
                 customer.getRentals().add(rental);
                 System.out.println("Movie rented successfully!");
@@ -99,23 +99,8 @@ public class RentalStore {
         }
         return null;
     }
-    public double calculateLateFee(LocalDate date){
-        int fine ;
-        for (Customer c : customers){
-            for (Rental r : c.getRentals()) {
-                if(date.compareTo(r.getReturnDate())> 7){
-                    System.out.println("You returned the movie late.so now you have to pay the fee.");
-                }
-                    if (date.compareTo(r.getReturnDate()) <= 7){
-                        System.out.println("You have to pay 2$.");
-                        fine = 2;
-                    }
-                    else {
-                        System.out.println("You have to pay 8$.");
-                        fine = 8;
-                    }
-            }
-        }
-        return fine;
-    }
+//    public double calculateLateFee(){
+////        int fine = 0 ;
+//
+//    }
 }

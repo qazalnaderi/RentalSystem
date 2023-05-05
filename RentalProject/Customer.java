@@ -6,7 +6,6 @@ public class Customer {
     private String email;
     private String phone;
     private String address;
-    //TODO this
     private ArrayList <Rental>  rentals;
 
     public Customer(int id , String name , String email , String phone , String address ) {

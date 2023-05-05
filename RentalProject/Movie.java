@@ -44,7 +44,6 @@ public boolean isAvailable(){
 public String getCast() {
     return cast;
 }
-//TODO this one
     public void setAvailable(Boolean available) {
         Available = available;
     }
