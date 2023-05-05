@@ -35,5 +35,11 @@ public class Rental {
     public void setRentalDate(Date rentalDate) {
         this.rentalDate = rentalDate;
     }
+    public double calculateLateFee() {
+        System.out.println("You're a bit late! Now you have to pay 1.4$ per day.");
+        long distance = (returnDate.getTime() - rentalDate.getTime()) ;
+        double fine = distance*1.4;
+        System.out.println("The amount of fine is: "+fine);
+        return  fine;
     }
 }

@@ -1,11 +1,9 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 public class RentalStore {
     private ArrayList<Movie> movies;
     private ArrayList<Customer> customers;
-
 
     public void register(Customer customer){
         for (Customer c : customers) {
@@ -30,7 +28,6 @@ public class RentalStore {
                 movies.add(movie);
                 System.out.println("Movie added successfully.");
             }
-
         }
     }
     public void removeMovies(Movie movie){
@@ -43,7 +40,6 @@ public class RentalStore {
                 System.out.println("Movie can't be deleted right now.It may be rented by someone or the movie doesn't exist at all.");
             }
         }
-
     }
     public List<Movie> getAvailableMovies(){
         ArrayList<Movie> availablemovies = new ArrayList<>();
@@ -54,7 +50,6 @@ public class RentalStore {
         }
         System.out.println("Here you can see a list of available movies: ");
         return availablemovies;
-
     }
     public void rentMovie(Movie movie , Customer customer){
         for (Movie item : movies) {
@@ -63,7 +58,7 @@ public class RentalStore {
                 int mainID = Integer.parseInt(fullID);
                 Rental rental = new Rental(movie , customer , mainID);
                 Date now = new Date();
-                rental.setRentalDate(now) ;
+                rental.setRentalDate(now);
                 customer.getRentals().add(rental);
                 System.out.println("Movie rented successfully!");
                 System.out.println("Attention : You have 7 days from now to return this movie or you will have to pay fine :) . ");
@@ -78,10 +73,19 @@ public class RentalStore {
             }
         }
     }
-    //TODO
-    public void returnMovie(){
-
-
+    public void returnMovie(Rental rental){
+        int i = 0;
+        for (Customer customer  : customers) {
+            if (customer.getRentals().get(i).getId()== rental.getId()){
+                customers.remove(customer);
+                customer.getRentals().remove(i);
+                rental.getMovie().setAvailable(true);
+                //rental.setRentalDate();
+                System.out.println("Deleting done successfully.");
+                break;
+            }
+            i++;
+        }
     }
     public Customer getCustomerById(int id){
         for (Customer c : customers) {
@@ -99,8 +103,4 @@ public class RentalStore {
         }
         return null;
     }
-//    public double calculateLateFee(){
-////        int fine = 0 ;
-//
-//    }
 }
