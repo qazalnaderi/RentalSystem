@@ -1,16 +1,16 @@
 import java.util.Date;
 import java.util.Random;
-//Setter for id????
 
 public class Item {
     private String title;
     private String genre;
     private Date releasedate;
     private Date rentDate ;
-    Random random = new Random();
-    long  low = 1;
-    long high = 10000;
-    private long ID = random.nextLong(high- low) + low;
+    private Date returnDate;
+    private  long ID;
+    boolean available = true;
+
+
     public Item(String title , String genre , Date releasedate , long ID ) {
         this.title = title;
         this.genre = genre;
@@ -31,6 +31,10 @@ public class Item {
     }
 
     public long getID() {
+        long  low = 1;
+        long high = 10000;
+        Random random = new Random();
+        ID= random.nextLong(high- low) + low;
         return ID;
     }
 
@@ -38,16 +42,24 @@ public class Item {
         return rentDate;
     }
 
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
     public String show(){
         return "ID : "+ID+"Name : "+title + "Genre : "+genre +"Release Date : "+releasedate+ " ";
     }
 
-//    public int rentalfee(){
-//        System.out.println("To rent an item you have to pay 2$ per day");
-//        Date returnDate = new Date();
-//        int difference = returnDate - returnDate ;
-//        int fee = difference * 2;
-//        return fee;
-//    }
+    public long rentalfee(){
+        System.out.println("To rent an item you have to pay 2$ per day");
+        Date returnDate = new Date();
+        long difference = returnDate.getTime() - rentDate.getTime() ;
+        long fee = difference * 2;
+        return fee;
+    }
 
 }

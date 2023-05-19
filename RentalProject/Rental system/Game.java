@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Game extends Item{
@@ -25,10 +24,10 @@ public class Game extends Item{
         return platform;
     }
 
-    public void rentGame(){
-
-    }
-    public void returnGame(){
-
-    }
+//    public void rentGame(){
+//
+//    }
+//    public void returnGame(){
+//
+//    }
 }

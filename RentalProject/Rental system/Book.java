@@ -1,10 +1,8 @@
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Book extends Item{
     private String author;
     private String publisher;
-//    private ArrayList <Book> books = new ArrayList<>();
 
     public Book(String title , String genre , Date releasedate , int ID , String author , String publisher){
         super(title ,  genre , releasedate ,  ID);
@@ -25,11 +23,10 @@ public class Book extends Item{
         super.show();
         return "Author : "+ author + "Publisher : "+publisher ;
     }
-
-    public void rentBook(){
-
-    }
-    public void returnBook(){
-
-    }
+//    public void rentBook(){
+//
+//    }
+//    public void returnBook(){
+//
+//    }
 }
