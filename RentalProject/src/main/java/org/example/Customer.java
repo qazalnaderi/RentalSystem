@@ -2,15 +2,15 @@ package org.example;
 import java.util.ArrayList;
 
 public class Customer {
-    private int id;
+    private int ID;
     private String name;
     private String email;
     private String phone;
     private String address;
     private ArrayList <Rental>  rentals;
 
-    public Customer(int id , String name , String email , String phone , String address ) {
-        this.id = id;
+    public Customer(int ID , String name , String email , String phone , String address ) {
+        this.ID = ID;
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -18,8 +18,8 @@ public class Customer {
         this.rentals = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
     public String getName() {

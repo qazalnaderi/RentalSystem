@@ -1,20 +1,20 @@
 package org.example;
 import java.util.Date;
 public class Rental {
-    private int id;
+    private int ID;
     private Movie movie;
     private Customer customer;
     private Date rentalDate;
     private Date returnDate  ;
 
-    public Rental(Movie movie , Customer customer , int id) {
+    public Rental(Movie movie , Customer customer , int ID) {
         this.movie = movie;
         this.customer = customer;
-        this.id = id;
+        this.ID = ID;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
     public Movie getMovie() {

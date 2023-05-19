@@ -8,7 +8,7 @@ public class RentalStore {
 
     public void register(Customer customer){
         for (Customer c : customers) {
-            if (c.getId()== customer.getId() && c.getName() == customer.getName() && c.getEmail()== customer.getEmail() && c.getAddress() == customer.getAddress()){
+            if (c.getID()== customer.getID() && c.getName() == customer.getName() && c.getEmail()== customer.getEmail() && c.getAddress() == customer.getAddress()){
                 System.out.println("Customer already exists in the system.");
                 break;
             }
@@ -21,7 +21,7 @@ public class RentalStore {
     }
     public void addMovie(Movie movie){
         for (Movie m : movies) {
-            if (m.getId() == movie.getId() && m.getTitle() == movie.getTitle() && m.getCast() == movie.getCast() && m.getGenre() == movie.getGenre() ){
+            if (m.getID() == movie.getID() && m.getTitle() == movie.getTitle() && m.getCast() == movie.getCast() && m.getGenre() == movie.getGenre() ){
                 System.out.println("It seems like the movie already exists in the system");
                 break;
             }
@@ -33,7 +33,7 @@ public class RentalStore {
     }
     public void removeMovies(Movie movie){
         for ( Movie m : movies) {
-            if (m.getId()==movie.getId() && movie.isAvailable()){
+            if (m.getID()==movie.getID() && movie.isAvailable()){
                 movies.remove(movie);
                 System.out.println("Movie removed successfully.");
             }
@@ -54,8 +54,8 @@ public class RentalStore {
     }
     public void rentMovie(Movie movie , Customer customer){
         for (Movie item : movies) {
-            if(movie.getId()== movie.getId()  && item.isAvailable()){
-                String fullID = Integer.toString(movie.getId()) + Integer.toString(customer.getId());
+            if(movie.getID()== movie.getID()  && item.isAvailable()){
+                String fullID = Integer.toString(movie.getID()) + Integer.toString(customer.getID());
                 int mainID = Integer.parseInt(fullID);
                 Rental rental = new Rental(movie , customer , mainID);
                 Date now = new Date();
@@ -65,7 +65,7 @@ public class RentalStore {
                 System.out.println("Attention : You have 7 days from now to return this movie or you will have to pay fine :) . ");
                 movie.setAvailable(false);
             }
-            else if (movie.getId()!= movie.getId() && !item.isAvailable()) {
+            else if (movie.getID()!= movie.getID() && !item.isAvailable()) {
                 System.out.println("Movie is has already been rent by another costumer.");
                 break;
             }
@@ -90,7 +90,7 @@ public class RentalStore {
     }
     public Customer getCustomerById(int id){
         for (Customer c : customers) {
-            if(c.getId() == id){
+            if(c.getID() == id){
                 return c;
             }
         }
@@ -98,7 +98,7 @@ public class RentalStore {
     }
     public Movie getMovieById(int id){
         for (Movie m : movies) {
-            if (m.getId() == id){
+            if (m.getID() == id){
                 return m;
             }
         }

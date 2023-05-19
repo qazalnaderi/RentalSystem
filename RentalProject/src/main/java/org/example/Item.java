@@ -31,13 +31,9 @@ public class Item {
         return releasedate;
     }
 
-//    public long getID() {
-//        long  low = 1;
-//        long high = 10000;
-//        Random random = new Random();
-//        ID= random.nextLong(high- low) + low;
-//        return ID;
-//    }
+    public int getID() {
+        return ID;
+    }
 
     public Date getRentDate() {
         return rentDate;
