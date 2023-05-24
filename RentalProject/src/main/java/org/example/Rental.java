@@ -17,11 +17,6 @@ public class Rental {
         this.rentalDate = new Date();
     }
 
-    public Rental(Movie movie , Customer customer , int ID) {
-        this.movie = movie;
-        this.customer = customer;
-        this.ID = ID;
-    }
 
     public int getID() {
         return ID;

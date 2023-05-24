@@ -101,6 +101,8 @@ public class RentalStore {
         System.out.println("Here you can see a list of available movies: ");
         return availablemovies;
     }
+
+    //TODO
     public void rentMovie(Movie movie , Customer customer){
         for (Movie m : movies) {
             if(movie.getID()== m.getID()  && m.isAvailable()){
@@ -217,23 +219,46 @@ public class RentalStore {
         } else {
             System.out.println("This item is already rented by another customer");
         }
-
     }
 
     public Customer getCustomerById(int id){
         for (Customer c : customers) {
             if(c.getID() == id){
+                System.out.println("Here is the costumer you're looking for: ");
                 return c;
             }
         }
+        System.out.println("Costumer wasn't found.");
         return null;
     }
     public Movie getMovieById(int id){
         for (Movie m : movies) {
             if (m.getID() == id){
+                System.out.println("Here is the movie you're looking for: ");
                 return m;
             }
         }
+        System.out.println("Movie wasn't found.");
+        return null;
+    }
+    public Book getBookById(int id){
+        for (Book b: books) {
+            if (b.getID() == id){
+                System.out.println("Here is the book you're looking for : ");
+                return b;
+            }
+        }
+        System.out.println("Book wasn't found.");
+        return null;
+    }
+    public Game getGameById(int id){
+        for (Game g: games) {
+            if (g.getID() == id){
+                System.out.println("Here is the game you're looking for: ");
+                return g;
+            }
+        }
+        System.out.println("Game wasn't found.");
         return null;
     }
 }

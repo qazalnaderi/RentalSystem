@@ -51,6 +51,4 @@ public class Item {
     public String show(){
         return "ID : "+ID+"Name : "+title + "Genre : "+genre +"Release Date : "+releasedate+ " ";
     }
-
-
 }

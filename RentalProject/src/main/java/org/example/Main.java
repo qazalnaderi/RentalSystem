@@ -3,10 +3,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.awt.print.Book;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -42,7 +39,18 @@ public class Main {
         }
 
         reader.close();          // close the input file
-
-
-    }
+        //write in json
+        Gson writing = new Gson();
+        String json = writing.toJson(allMoudulesList);
+        String filepath = "C:\\Users\\HP\\RentalSystem\\RentalProject\\src\\test\\TestYourFork.json";
+        try {
+            FileWriter writer = new FileWriter(filepath);
+            writer.write(json);
+            writer.close();
+            System.out.println("JSON Data has been updated.");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        }
 }
