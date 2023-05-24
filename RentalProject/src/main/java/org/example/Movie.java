@@ -25,11 +25,6 @@ public class Movie extends Item{
         return director;
     }
 
-//    public void rentMovie(){
-//
-//    }
-//    public void returnMovie(){
-//
-//    }
+
 
 }

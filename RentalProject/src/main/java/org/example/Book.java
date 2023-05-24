@@ -24,10 +24,4 @@ public class Book extends Item{
         super.show();
         return "Author : "+ author + "Publisher : "+publisher ;
     }
-//    public void rentBook(){
-//
-//    }
-//    public void returnBook(){
-//
-//    }
 }

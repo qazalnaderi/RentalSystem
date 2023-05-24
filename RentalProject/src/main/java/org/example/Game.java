@@ -30,10 +30,4 @@ public class Game extends Item{
     public String getDirector() {
         return director;
     }
-    //    public void rentGame(){
-//
-//    }
-//    public void returnGame(){
-//
-//    }
 }

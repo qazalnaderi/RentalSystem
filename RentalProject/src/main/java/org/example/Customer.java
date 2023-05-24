@@ -41,4 +41,13 @@ public class Customer {
     public ArrayList<Rental> getRentals() {
         return rentals;
     }
+
+
+    public void addRent(Rental rental) {
+        if(rentals== null){
+            rentals = new ArrayList<>();
+        }
+        rentals.add(rental);
+        System.out.println("You rented an item successfully.");
+    }
 }

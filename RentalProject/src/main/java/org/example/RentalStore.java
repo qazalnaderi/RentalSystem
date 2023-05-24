@@ -3,8 +3,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 public class RentalStore {
-    private ArrayList<Movie> movies;
-    private ArrayList<Customer> customers;
+    public static ArrayList<Item> itemList = new ArrayList<>();
+    public static ArrayList<Customer> customers = new ArrayList<>();
+    public static ArrayList<Movie> movies = new ArrayList<>();
+    public static ArrayList<Game> games= new ArrayList<>();
+    public static ArrayList<Book> books = new ArrayList<>();
+    public static ArrayList<Rental> rentalList = new ArrayList<>();
 
     public void register(Customer customer){
         for (Customer c : customers) {
@@ -22,12 +26,35 @@ public class RentalStore {
     public void addMovie(Movie movie){
         for (Movie m : movies) {
             if (m.getID() == movie.getID() && m.getTitle() == movie.getTitle() && m.getCast() == movie.getCast() && m.getGenre() == movie.getGenre() ){
-                System.out.println("It seems like the movie already exists in the system");
+                System.out.println("It seems like the movie already exists in the system.");
                 break;
             }
             else {
                 movies.add(movie);
                 System.out.println("Movie added successfully.");
+            }
+        }
+    }
+
+    public void addBook(Book book) {
+        for (Book b : books) {
+            if (b.getID() == book.getID() && b.getTitle() == book.getTitle() && b.getAuthor() == book.getAuthor() && b.getGenre() == book.getGenre() && b.getPublisher() == book.getPublisher()) {
+                System.out.println("It seems like the book already exists in the system.");
+            } else {
+                books.add(book);
+                System.out.println("Book added successfully.");
+            }
+        }
+    }
+
+    public void addGame(Game game){
+        for (Game g: games) {
+            if (g.getID() == game.getID() && g.getTitle() == game.getTitle() && g.getGenre() == game.getGenre() && g.getDirector()==game.getDirector() && g.getPublisher() == game.getPublisher() && g.getPlatform() == game.getPlatform()){
+                System.out.println("It seems like the game already exists in the system.");
+            }
+            else {
+                games.add(game);
+                System.out.println("Game added successfully.");
             }
         }
     }
@@ -77,7 +104,7 @@ public class RentalStore {
     public void returnMovie(Rental rental){
         int i = 0;
         for (Customer customer  : customers) {
-            if (customer.getRentals().get(i).getId()== rental.getId()){
+            if (customer.getRentals().get(i).getID()== rental.getID()){
                 customers.remove(customer);
                 customer.getRentals().remove(i);
                 rental.getMovie().setAvailable(true);
@@ -87,6 +114,19 @@ public class RentalStore {
             }
             i++;
         }
+    }
+    public static void rentItem(Item item, Customer customer) {
+        String id = Integer.toString(item.getID()) + Integer.toString(customer.getID());
+        int rentID = Integer.parseInt(id);
+        if(item.isAvailable()){
+            Rental rental = new Rental(item, customer,rentID);
+            customer.addRent(rental);
+            item.setAvailable(false);
+            System.out.println("You have rented " + item.getTitle()+" successfully.");
+        } else {
+            System.out.println("This item is already rented by another customer");
+        }
+
     }
     public Customer getCustomerById(int id){
         for (Customer c : customers) {
