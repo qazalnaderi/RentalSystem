@@ -3,12 +3,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 public class RentalStore {
-    public static ArrayList<Item> itemList = new ArrayList<>();
     public static ArrayList<Customer> customers = new ArrayList<>();
     public static ArrayList<Movie> movies = new ArrayList<>();
     public static ArrayList<Game> games= new ArrayList<>();
     public static ArrayList<Book> books = new ArrayList<>();
-    public static ArrayList<Rental> rentalList = new ArrayList<>();
 
     public void register(Customer customer){
         for (Customer c : customers) {
