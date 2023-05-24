@@ -12,7 +12,7 @@ public class RentalStore {
 
     public void register(Customer customer){
         for (Customer c : customers) {
-            if (c.getID()== customer.getID() && c.getName() == customer.getName() && c.getEmail()== customer.getEmail() && c.getAddress() == customer.getAddress()){
+            if (c.getID()== customer.getID()){
                 System.out.println("Customer already exists in the system.");
                 break;
             }
@@ -25,7 +25,7 @@ public class RentalStore {
     }
     public void addMovie(Movie movie){
         for (Movie m : movies) {
-            if (m.getID() == movie.getID() && m.getTitle() == movie.getTitle() && m.getCast() == movie.getCast() && m.getGenre() == movie.getGenre() ){
+            if (m.getID() == movie.getID() ){
                 System.out.println("It seems like the movie already exists in the system.");
                 break;
             }
@@ -38,7 +38,7 @@ public class RentalStore {
 
     public void addBook(Book book) {
         for (Book b : books) {
-            if (b.getID() == book.getID() && b.getTitle() == book.getTitle() && b.getAuthor() == book.getAuthor() && b.getGenre() == book.getGenre() && b.getPublisher() == book.getPublisher()) {
+            if (b.getID() == book.getID() ) {
                 System.out.println("It seems like the book already exists in the system.");
             } else {
                 books.add(book);
@@ -49,7 +49,7 @@ public class RentalStore {
 
     public void addGame(Game game){
         for (Game g: games) {
-            if (g.getID() == game.getID() && g.getTitle() == game.getTitle() && g.getGenre() == game.getGenre() && g.getDirector()==game.getDirector() && g.getPublisher() == game.getPublisher() && g.getPlatform() == game.getPlatform()){
+            if (g.getID() == game.getID()){
                 System.out.println("It seems like the game already exists in the system.");
             }
             else {
@@ -69,6 +69,28 @@ public class RentalStore {
             }
         }
     }
+    public void removeBook(Book book){
+        for (Book b : books) {
+            if (b.getID() == book.getID() && book.isAvailable()){
+                books.remove(book);
+                System.out.println("Book removed successfully.");
+            }
+            else {
+                System.out.println("Book can't be deleted right now.It may be rented by someone or the book doesn't exist at all.");
+            }
+        }
+    }
+    public void removeGame(Game game){
+        for (Game g : games) {
+            if (g.getID() == game.getID() &&game.isAvailable()){
+                games.remove(game);
+                System.out.println("Game removed successfully.");
+            }
+            else {
+                System.out.println("Game can't be deleted right now.It may be rented by someone or the game doesn't exist at all.");
+            }
+        }
+    }
     public List<Movie> getAvailableMovies(){
         ArrayList<Movie> availablemovies = new ArrayList<>();
         for ( Movie movie : movies) {
@@ -80,8 +102,8 @@ public class RentalStore {
         return availablemovies;
     }
     public void rentMovie(Movie movie , Customer customer){
-        for (Movie item : movies) {
-            if(movie.getID()== movie.getID()  && item.isAvailable()){
+        for (Movie m : movies) {
+            if(movie.getID()== m.getID()  && m.isAvailable()){
                 String fullID = Integer.toString(movie.getID()) + Integer.toString(customer.getID());
                 int mainID = Integer.parseInt(fullID);
                 Rental rental = new Rental(movie , customer , mainID);
@@ -92,7 +114,7 @@ public class RentalStore {
                 System.out.println("Attention : You have 7 days from now to return this movie or you will have to pay fine :) . ");
                 movie.setAvailable(false);
             }
-            else if (movie.getID()!= movie.getID() && !item.isAvailable()) {
+            else if (!m.isAvailable()) {
                 System.out.println("Movie is has already been rent by another costumer.");
                 break;
             }
@@ -101,6 +123,49 @@ public class RentalStore {
             }
         }
     }
+    public void rentBook(Book book , Customer customer){
+        for (Book b : books) {
+            if (b.getID() == book.getID() && b.isAvailable()){
+                String fullID = Integer.toString(book.getID()) + Integer.toString(customer.getID());
+                int mainID = Integer.parseInt(fullID);
+                Rental rental = new Rental(book , customer , mainID);
+                Date now = new Date();
+                rental.setRentalDate(now);
+                customer.getRentals().add(rental);
+                System.out.println("Book rented successfully!");
+                System.out.println("Attention : You have 7 days from now to return this book or you will have to pay fine :) . ");
+                book.setAvailable(false);
+            } else if (!b.isAvailable()) {
+                System.out.println("Movie is has already been rent by another costumer.");
+                break;
+            }
+            else {
+                System.out.println("Book wasn't found.");
+            }
+        }
+    }
+    public void rentGame(Game game , Customer customer){
+        for (Game g : games) {
+            if (g.getID() == game.getID() && g.isAvailable()){
+                String fullID = Integer.toString(game.getID()) + Integer.toString(customer.getID());
+                int mainID = Integer.parseInt(fullID);
+                Rental rental = new Rental(game , customer , mainID);
+                Date now = new Date();
+                rental.setRentalDate(now);
+                customer.getRentals().add(rental);
+                System.out.println("Game rented successfully!");
+                System.out.println("Attention : You have 7 days from now to return this game or you will have to pay fine :) . ");
+                game.setAvailable(false);
+            } else if (!g.isAvailable()) {
+                System.out.println("Game is has already been rent by another costumer.");
+                break;
+            }
+            else {
+                System.out.println("Game wasn't found.");
+            }
+        }
+    }
+
     public void returnMovie(Rental rental){
         int i = 0;
         for (Customer customer  : customers) {
@@ -108,13 +173,39 @@ public class RentalStore {
                 customers.remove(customer);
                 customer.getRentals().remove(i);
                 rental.getMovie().setAvailable(true);
-                //rental.setRentalDate();
-                System.out.println("Deleting done successfully.");
+                System.out.println("Movie deleted successfully.");
                 break;
             }
             i++;
         }
     }
+    public void returnBook(Rental rental){
+        int i = 0;
+        for (Customer customer  : customers) {
+            if (customer.getRentals().get(i).getID()== rental.getID()){
+                customers.remove(customer);
+                customer.getRentals().remove(i);
+                rental.getMovie().setAvailable(true);
+                System.out.println("Book deleted successfully.");
+                break;
+            }
+            i++;
+        }
+    }
+    public void returnGame(Rental rental){
+        int i = 0;
+        for (Customer customer  : customers) {
+            if (customer.getRentals().get(i).getID()== rental.getID()){
+                customers.remove(customer);
+                customer.getRentals().remove(i);
+                rental.getMovie().setAvailable(true);
+                System.out.println("Game deleted successfully.");
+                break;
+            }
+            i++;
+        }
+    }
+
     public static void rentItem(Item item, Customer customer) {
         String id = Integer.toString(item.getID()) + Integer.toString(customer.getID());
         int rentID = Integer.parseInt(id);
@@ -128,6 +219,7 @@ public class RentalStore {
         }
 
     }
+
     public Customer getCustomerById(int id){
         for (Customer c : customers) {
             if(c.getID() == id){

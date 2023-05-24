@@ -1,11 +1,21 @@
 package org.example;
 import java.util.Date;
 public class Rental {
-    private int ID;
+    private Item item;
     private Movie movie;
+    private Game game;
+    private Book book;
+    private int ID;
     private Customer customer;
     private Date rentalDate;
     private Date returnDate  ;
+
+    public Rental(Item item , Customer customer , int ID){
+        this.item = item;
+        this.customer = new Customer(customer.getID() , customer.getName(),customer.getEmail(), customer.getPhone(), customer.getAddress() );
+        this.ID = ID;
+        this.rentalDate = new Date();
+    }
 
     public Rental(Movie movie , Customer customer , int ID) {
         this.movie = movie;
