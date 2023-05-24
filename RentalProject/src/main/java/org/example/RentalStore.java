@@ -101,8 +101,27 @@ public class RentalStore {
         System.out.println("Here you can see a list of available movies: ");
         return availablemovies;
     }
+    public List<Book> getAvailableBooks(){
+        ArrayList<Book> availablebooks = new ArrayList<>();
+        for ( Book book : books) {
+            if (book.isAvailable()){
+                availablebooks.add(book);
+            }
+        }
+        System.out.println("Here you can see a list of available books: ");
+        return availablebooks;
+    }
+    public List<Game> getAvailableGames(){
+        ArrayList<Game> availablegames = new ArrayList<>();
+        for ( Game game : games) {
+            if (game.isAvailable()){
+                availablegames.add(game);
+            }
+        }
+        System.out.println("Here you can see a list of available games: ");
+        return availablegames;
+    }
 
-    //TODO
     public void rentMovie(Movie movie , Customer customer){
         for (Movie m : movies) {
             if(movie.getID()== m.getID()  && m.isAvailable()){
